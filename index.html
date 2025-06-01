@@ -1,30 +1,63 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Custom eReader</title>
+  <meta charset="UTF-8">
+  <title>Мой Ридер</title>
   <style>
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: black;
+      color: white;
       font-family: "Georgia", serif;
+      font-size: 20px;
       padding: 2rem;
-      max-width: 600px;
+      max-width: 800px;
       margin: auto;
       line-height: 1.6;
-      white-space: pre-wrap; /* preserve spaces and line breaks */
     }
-    #content {
+    textarea {
+      width: 100%;
+      height: 200px;
       font-size: 18px;
+      font-family: inherit;
+      margin-bottom: 1rem;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      margin-bottom: 2rem;
+      cursor: pointer;
+    }
+    #reader {
+      white-space: pre-wrap;
+      border-top: 1px solid gray;
+      padding-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div id="content">
-    
-Hi baby ;)
-“Руби всегда плохо переносила жару, с самого детства. Когда она была маленькой, лето в Гринвич-Вилледж превращалось в кошмар. Руби ноет, хочет уйти с площадки, отказывается надевать панамку, ее бледные щеки краснеют, между плотненькими бедрами появляется зудящая сыпь.”
+  <h1>Мой Русский Ридер</h1>
 
-  </div>
+  <textarea id="input" placeholder="Вставьте сюда русский текст..."></textarea>
+  <br>
+  <button onclick="updateReader()">Загрузить текст</button>
+
+  <div id="reader"></div>
+
+  <script>
+    function updateReader() {
+      const text = document.getElementById('input').value;
+      document.getElementById('reader').textContent = text;
+      localStorage.setItem('russianText', text); // Save it
+    }
+
+    // Load saved text on page load
+    window.onload = function () {
+      const saved = localStorage.getItem('russianText');
+      if (saved) {
+        document.getElementById('input').value = saved;
+        document.getElementById('reader').textContent = saved;
+      }
+    };
+  </script>
 </body>
 </html>
